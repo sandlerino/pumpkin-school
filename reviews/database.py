@@ -169,7 +169,7 @@ class Subject(database.base):
 
     id = Column(Integer, primary_key=True)
     shortcut = Column(String)
-    guild_id = Column(Integer)
+    guild_id = Column(BigInteger)
     category = Column(String)
     name = Column(String)
     reviews = relationship(
