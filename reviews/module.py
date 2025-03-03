@@ -31,24 +31,27 @@ def _split_review(review: str) -> List[str]:
     ans = []
     start_pos = 0
     end_pos = MAX_LEN
-    while end_pos <= len(review):
-        chunk = review[start_pos: end_pos]
-        if chunk[len(chunk) - 1] != " " and end_pos != len(review):
-            end_pos = end_pos - (end_pos - chunk.rfind(" "))
-            chunk = chunk[0:chunk.rfind(" ") + 1]
-            ans.append(chunk)
-        else:
-            ans.append(chunk)
+    if MAX_LEN >= len(review):
+        ans.append(review)
+    else:
+        while end_pos <= len(review):
+            chunk = review[start_pos: end_pos]
+            if chunk[len(chunk) - 1] != " " and end_pos != len(review):
+                end_pos = end_pos - (end_pos - chunk.rfind(" "))
+                chunk = chunk[0:chunk.rfind(" ") + 1]
+                ans.append(chunk)
+            else:
+                ans.append(chunk)
 
-        if end_pos == len(review):
-            break
+            if end_pos == len(review):
+                break
 
-        start_pos = end_pos + 1
+            start_pos = end_pos + 1
 
-        end_pos = start_pos + MAX_LEN
+            end_pos = start_pos + MAX_LEN
 
-        if end_pos > len(review):
-            end_pos = len(review)
+            if end_pos > len(review):
+                end_pos = len(review)
     return ans
 
 
